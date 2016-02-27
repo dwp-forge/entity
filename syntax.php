@@ -44,14 +44,14 @@ class syntax_plugin_entity extends DokuWiki_Syntax_Plugin {
         $this->Lexer->addSpecialPattern('&&(?:#\d+|\w+);;', $mode, $this->mode);
     }
 
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
         if ($state == DOKU_LEXER_SPECIAL) {
             return array($state, substr($match, 1, -1));
         }
         return false;
     }
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if ($mode == 'xhtml') {
             list($state, $match) = $data;
             if ($state == DOKU_LEXER_SPECIAL) {
